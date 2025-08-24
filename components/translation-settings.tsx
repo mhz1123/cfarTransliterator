@@ -157,7 +157,7 @@ export function TranslationSettings({
               </CardTitle>
               <CardDescription>Configure transliteration behavior and output preferences</CardDescription>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Button variant="outline" size="sm" onClick={handleExportSettings}>
                 <Download className="h-4 w-4 mr-2" />
                 Export
