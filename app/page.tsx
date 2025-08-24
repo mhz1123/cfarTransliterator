@@ -49,7 +49,7 @@ export default function HomePage() {
                 <Languages className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               </div>
               <div>
-                <h1 className="text-lg sm:text-xl font-bold">Urdu Transliteration</h1>
+                <h1 className="text-lg sm:text-xl font-bold">C-FAR Transliterator</h1>
                 <p className="text-xs sm:text-sm text-muted-foreground">Advanced transliteration system</p>
               </div>
             </div>
