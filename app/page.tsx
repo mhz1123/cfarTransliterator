@@ -42,26 +42,27 @@ export default function HomePage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <Languages className="h-6 w-6 text-primary" />
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg">
+                <Languages className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               </div>
               <div>
-                <h1 className="text-xl font-bold">Urdu Transliteration</h1>
-                <p className="text-sm text-muted-foreground">Advanced transliteration system</p>
+                <h1 className="text-lg sm:text-xl font-bold">Urdu Transliteration</h1>
+                <p className="text-xs sm:text-sm text-muted-foreground">Advanced transliteration system</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="font-mono">
+            <div className="flex items-center gap-2 sm:gap-3 self-end sm:self-auto">
+              <Badge variant="secondary" className="font-mono text-xs">
                 v2.0
               </Badge>
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline" size="sm">
-                    <Settings className="h-4 w-4 mr-2" />
-                    Settings
+                  <Button variant="outline" size="sm" className="text-xs sm:text-sm bg-transparent">
+                    <Settings className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                    <span className="hidden xs:inline">Settings</span>
+                    <span className="xs:hidden">Config</span>
                   </Button>
                 </SheetTrigger>
                 <SheetContent className="w-full sm:max-w-2xl overflow-y-auto">
@@ -80,12 +81,12 @@ export default function HomePage() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="space-y-8">
+      <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+        <div className="space-y-6 sm:space-y-8">
           {/* Hero Section */}
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl font-bold tracking-tight">Advanced Urdu Transliteration System</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center space-y-3 sm:space-y-4">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Advanced Urdu Transliteration System</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
               Convert between Urdu, Roman Urdu, and English using our hybrid lexicon and rule-based engine with advanced
               customization options
             </p>
@@ -95,58 +96,58 @@ export default function HomePage() {
           <LanguageSelector direction={direction} onDirectionChange={setDirection} />
 
           {/* Features */}
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Type className="h-5 w-5 text-primary" />
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                  <Type className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                   Text Translation
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Real-time transliteration with quality metrics and customizable options
                 </p>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-primary" />
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                   Batch Processing
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Upload multiple files simultaneously with progress tracking and auto-download
                 </p>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Zap className="h-5 w-5 text-primary" />
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                  <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                   Hybrid Engine
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Combines lexicon-based and rule-based methods for maximum accuracy
                 </p>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-primary" />
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                  <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                   Quality Control
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Monitor completeness and configure quality thresholds and warnings
                 </p>
               </CardContent>
@@ -155,30 +156,42 @@ export default function HomePage() {
 
           {/* Main Interface */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="text" className="flex items-center gap-2">
-                <Type className="h-4 w-4" />
-                Text Translation
+            <TabsList className="grid w-full grid-cols-3 h-auto">
+              <TabsTrigger
+                value="text"
+                className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 py-2 sm:py-1.5 text-xs sm:text-sm"
+              >
+                <Type className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">Text Translation</span>
+                <span className="xs:hidden">Text</span>
               </TabsTrigger>
-              <TabsTrigger value="files" className="flex items-center gap-2">
-                <FileText className="h-4 w-4" />
-                File Processing
+              <TabsTrigger
+                value="files"
+                className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 py-2 sm:py-1.5 text-xs sm:text-sm"
+              >
+                <FileText className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">File Processing</span>
+                <span className="xs:hidden">Files</span>
               </TabsTrigger>
-              <TabsTrigger value="analytics" className="flex items-center gap-2">
-                <BarChart3 className="h-4 w-4" />
-                Analytics
+              <TabsTrigger
+                value="analytics"
+                className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 py-2 sm:py-1.5 text-xs sm:text-sm"
+              >
+                <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">Analytics</span>
+                <span className="xs:hidden">Stats</span>
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="text" className="space-y-6">
+            <TabsContent value="text" className="space-y-4 sm:space-y-6 mt-4 sm:mt-6">
               <TextTranslator direction={direction} onDirectionChange={setDirection} />
             </TabsContent>
 
-            <TabsContent value="files" className="space-y-6">
+            <TabsContent value="files" className="space-y-4 sm:space-y-6 mt-4 sm:mt-6">
               <FileProcessor direction={direction} />
             </TabsContent>
 
-            <TabsContent value="analytics" className="space-y-6">
+            <TabsContent value="analytics" className="space-y-4 sm:space-y-6 mt-4 sm:mt-6">
               <StatsDashboard stats={mockStats} />
             </TabsContent>
           </Tabs>
@@ -186,20 +199,20 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-card/50 mt-16">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-center md:text-left">
-              <p className="text-sm text-muted-foreground">
+      <footer className="border-t bg-card/50 mt-12 sm:mt-16">
+        <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
+          <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 text-center">
+            <div>
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Advanced Urdu Transliteration System with File Processing Capabilities
               </p>
               <p className="text-xs text-muted-foreground mt-1">Powered by hybrid lexicon and rule-based engine</p>
             </div>
-            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs text-muted-foreground">
               <span>Method: {options.preferredMethod}</span>
-              <Separator orientation="vertical" className="h-4" />
+              <Separator orientation="vertical" className="h-3 sm:h-4" />
               <span>Quality: {options.qualityThreshold}%</span>
-              <Separator orientation="vertical" className="h-4" />
+              <Separator orientation="vertical" className="h-3 sm:h-4" />
               <span>Batch: {options.batchSize} files</span>
             </div>
           </div>

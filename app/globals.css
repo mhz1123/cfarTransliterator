@@ -135,3 +135,16 @@
     @apply font-heading font-bold;
   }
 }
+
+@layer utilities {
+  .xs\:inline {
+    @media (min-width: 475px) {
+      display: inline;
+    }
+  }
+  .xs\:hidden {
+    @media (min-width: 475px) {
+      display: none;
+    }
+  }
+}
