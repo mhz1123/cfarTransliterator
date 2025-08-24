@@ -28,47 +28,49 @@ export function LanguageSelector({ direction, onDirectionChange, className }: La
   return (
     <Card className={className}>
       <CardContent className="p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Languages className="h-5 w-5 text-primary" />
-              <span className="font-medium">Translation Direction</span>
-            </div>
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0">
+          <div className="flex items-center gap-2">
+            <Languages className="h-5 w-5 text-primary" />
+            <span className="font-medium">Translation Direction</span>
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* From Language */}
-            <div className="text-center">
-              <div className="flex items-center gap-2 mb-1">
-                <Badge variant="outline" className="font-mono">
-                  {current.from.code}
-                </Badge>
-                <span className="font-medium">{current.from.name}</span>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center">
+            {/* Language selection container */}
+            <div className="flex items-center justify-center gap-3">
+              {/* From Language */}
+              <div className="text-center">
+                <div className="flex items-center gap-2 mb-1">
+                  <Badge variant="outline" className="font-mono">
+                    {current.from.code}
+                  </Badge>
+                  <span className="font-medium text-sm md:text-base">{current.from.name}</span>
+                </div>
+                <div className="text-xs md:text-sm text-muted-foreground">{current.from.script}</div>
               </div>
-              <div className="text-sm text-muted-foreground">{current.from.script}</div>
+
+              <ArrowRight className="h-4 w-4 text-muted-foreground" />
+
+              {/* To Language */}
+              <div className="text-center">
+                <div className="flex items-center gap-2 mb-1">
+                  <Badge variant="outline" className="font-mono">
+                    {current.to.code}
+                  </Badge>
+                  <span className="font-medium text-sm md:text-base">{current.to.name}</span>
+                </div>
+                <div className="text-xs md:text-sm text-muted-foreground">{current.to.script}</div>
+              </div>
             </div>
 
-            <ArrowRight className="h-4 w-4 text-muted-foreground" />
-
-            {/* To Language */}
-            <div className="text-center">
-              <div className="flex items-center gap-2 mb-1">
-                <Badge variant="outline" className="font-mono">
-                  {current.to.code}
-                </Badge>
-                <span className="font-medium">{current.to.name}</span>
-              </div>
-              <div className="text-sm text-muted-foreground">{current.to.script}</div>
+            <div className="flex justify-center md:justify-start md:ml-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onDirectionChange(direction === "urdu-to-roman" ? "roman-to-urdu" : "urdu-to-roman")}
+              >
+                Swap
+              </Button>
             </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => onDirectionChange(direction === "urdu-to-roman" ? "roman-to-urdu" : "urdu-to-roman")}
-              className="ml-4"
-            >
-              Swap
-            </Button>
           </div>
         </div>
       </CardContent>
