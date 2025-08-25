@@ -12,6 +12,7 @@ import { Upload, Download, FileText, AlertCircle, CheckCircle2, Loader2 } from "
 import type { TransliterationResult } from "@/lib/transliteration"
 import { useTranslationOptions } from "@/lib/translation-options-context"
 import { enhancedTransliterationEngine } from "@/components/enhanced-transliteration-engine"
+import { validateFile, createDownloadBlob, parseFile } from "@/lib/file-utils"
 
 interface ProcessedFile {
   id: string
@@ -22,10 +23,7 @@ interface ProcessedFile {
   size: number
   status: "processing" | "completed" | "error"
   error?: string
-}
-
-interface FileProcessorProps {
-  direction: "urdu-to-roman" | "roman-to-urdu"
+  fileType: string
 }
 
 export function FileProcessor({ direction }: FileProcessorProps) {
@@ -38,13 +36,12 @@ export function FileProcessor({ direction }: FileProcessorProps) {
     return await enhancedTransliterationEngine.transliterateWithOptions(text, direction, options)
   }
 
-  const readFileContent = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onload = (e) => resolve(e.target?.result as string)
-      reader.onerror = () => reject(new Error("Failed to read file"))
-      reader.readAsText(file, "utf-8")
-    })
+  const readFileContent = async (file: File): Promise<string> => {
+    try {
+      return await parseFile(file)
+    } catch (error) {
+      throw new Error(`Failed to read ${file.name}: ${error instanceof Error ? error.message : "Unknown error"}`)
+    }
   }
 
   const processFiles = useCallback(
@@ -62,12 +59,17 @@ export function FileProcessor({ direction }: FileProcessorProps) {
           const fileId = `${Date.now()}-${Math.random()}`
 
           try {
+            const validation = validateFile(file)
+            if (!validation.isValid) {
+              throw new Error(validation.error)
+            }
+
             // Update progress if enabled
             if (options.progressUpdates) {
               setProgress((i / fileArray.length) * 100)
             }
 
-            // Read file content
+            // Read file content using new parser
             const content = await readFileContent(file)
 
             // Process content through enhanced transliteration engine
@@ -81,6 +83,7 @@ export function FileProcessor({ direction }: FileProcessorProps) {
               transliterationResult: result,
               size: file.size,
               status: "completed",
+              fileType: "." + file.name.split(".").pop()?.toLowerCase() || ".txt",
             }
 
             newFiles.push(processedFile)
@@ -109,6 +112,7 @@ export function FileProcessor({ direction }: FileProcessorProps) {
               size: file.size,
               status: "error",
               error: error instanceof Error ? error.message : "Unknown error",
+              fileType: "." + file.name.split(".").pop()?.toLowerCase() || ".txt",
             }
 
             newFiles.push(errorFile)
@@ -134,15 +138,8 @@ export function FileProcessor({ direction }: FileProcessorProps) {
   }
 
   const downloadFile = (file: ProcessedFile) => {
-    const blob = new Blob([file.processedContent], { type: "text/plain;charset=utf-8" })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement("a")
-    link.href = url
-    link.download = `processed_${file.name}`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    URL.revokeObjectURL(url)
+    const fileType = file.fileType === ".pdf" ? "pdf" : file.fileType === ".docx" ? "docx" : "txt"
+    createDownloadBlob(file.processedContent, file.name, fileType)
   }
 
   const downloadAllFiles = () => {
@@ -205,14 +202,14 @@ export function FileProcessor({ direction }: FileProcessorProps) {
                   <p className="mb-2 text-sm text-muted-foreground">
                     <span className="font-semibold">Click to upload</span> or drag and drop
                   </p>
-                  <p className="text-xs text-muted-foreground">TXT, MD, CSV files (MAX. 10MB each)</p>
+                  <p className="text-xs text-muted-foreground">TXT, MD, CSV, PDF, DOCX files (MAX. 10MB each)</p>
                 </div>
                 <input
                   id="file-upload"
                   type="file"
                   className="hidden"
                   multiple
-                  accept=".txt,.md,.csv,.text"
+                  accept=".txt,.md,.csv,.text,.pdf,.docx"
                   onChange={handleFileUpload}
                   disabled={isProcessing}
                 />
@@ -338,4 +335,8 @@ export function FileProcessor({ direction }: FileProcessorProps) {
       )}
     </div>
   )
+}
+
+interface FileProcessorProps {
+  direction: "urdu-to-roman" | "roman-to-urdu"
 }
