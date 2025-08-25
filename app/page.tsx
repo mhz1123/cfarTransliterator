@@ -5,14 +5,14 @@ import { FileProcessor } from "@/components/file-processor"
 import { TextTranslator } from "@/components/text-translator"
 import { LanguageSelector } from "@/components/language-selector"
 import { TranslationSettings } from "@/components/translation-settings"
-import { StatsDashboard } from "@/components/stats-dashboard"
+import { RichTextEditor } from "@/components/rich-text-editor"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Languages, FileText, Zap, Shield, Settings, BarChart3, Type } from "lucide-react"
+import { Languages, FileText, Zap, Shield, Settings, Type } from "lucide-react"
 import { useTranslationOptions } from "@/lib/translation-options-context"
 
 export default function HomePage() {
@@ -20,23 +20,7 @@ export default function HomePage() {
   const [activeTab, setActiveTab] = useState("text")
   const { options, updateOptions, resetOptions } = useTranslationOptions()
 
-  // Mock stats data - in a real app, this would come from a backend or local storage
-  const mockStats = {
-    totalTranslations: 1247,
-    totalWords: 45623,
-    totalFiles: 89,
-    averageAccuracy: 94,
-    methodBreakdown: {
-      lexicon: 567,
-      ruleBased: 234,
-      hybrid: 446,
-    },
-    recentActivity: {
-      today: 23,
-      thisWeek: 156,
-      thisMonth: 489,
-    },
-  }
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -174,12 +158,12 @@ export default function HomePage() {
                 <span className="xs:hidden">Files</span>
               </TabsTrigger>
               <TabsTrigger
-                value="analytics"
+                value="editor"
                 className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 py-2 sm:py-1.5 text-xs sm:text-sm"
               >
-                <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="hidden xs:inline">Analytics</span>
-                <span className="xs:hidden">Stats</span>
+                <Type className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">Text Editor (Beta)</span>
+                <span className="xs:hidden">Editor (Beta)</span>
               </TabsTrigger>
             </TabsList>
 
@@ -191,8 +175,8 @@ export default function HomePage() {
               <FileProcessor direction={direction} />
             </TabsContent>
 
-            <TabsContent value="analytics" className="space-y-4 sm:space-y-6 mt-4 sm:mt-6">
-              <StatsDashboard stats={mockStats} />
+            <TabsContent value="editor" className="space-y-4 sm:space-y-6 mt-4 sm:mt-6">
+              <RichTextEditor direction={direction} onDirectionChange={setDirection} />
             </TabsContent>
           </Tabs>
         </div>
