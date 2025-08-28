@@ -358,11 +358,11 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
     <div className="space-y-6">
       <Card>
         <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <CardTitle className="leading-none font-semibold flex items-center gap-2">
+              <CardTitle className="leading-none font-semibold flex flex-col sm:flex-row sm:items-center gap-2">
                 Rich Text Editor
-                <Badge variant="secondary" className="text-xs">
+                <Badge variant="secondary" className="text-xs w-fit">
                   {direction === "roman-to-urdu" ? "Roman → Urdu" : "Urdu → Roman"}
                 </Badge>
               </CardTitle>
@@ -374,7 +374,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
               onClick={swapDirection}
               variant="outline"
               size="sm"
-              className="text-xs"
+              className="text-xs w-full sm:w-auto"
             >
               <ArrowRightLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
               Swap
@@ -383,7 +383,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Toolbar */}
-          <div className="flex flex-wrap items-center gap-2 p-3 border rounded-lg bg-muted/30">
+          <div className="flex flex-wrap items-center gap-2 p-2 sm:p-3 border rounded-lg bg-muted/30">
             {/* Text Formatting */}
             <div className="flex items-center gap-1">
               <Button
@@ -492,10 +492,10 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
           </div>
 
           {/* Editor */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
             {/* Input Editor */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <h4 className="text-sm font-medium">Input Text ({direction === "roman-to-urdu" ? "Roman Urdu" : "Urdu"})</h4>
                 <div className="flex gap-2">
                   <Button
@@ -534,7 +534,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
 
             {/* Converted Output */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <h4 className="text-sm font-medium">Converted Text ({direction === "roman-to-urdu" ? "Urdu" : "Roman Urdu"})</h4>
                 <Button
                   onClick={convertContent}
@@ -554,12 +554,12 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
                 dangerouslySetInnerHTML={{ __html: convertedContent || '<p class="text-muted-foreground text-sm">Converted text will appear here...</p>' }}
               />
               {convertedContent && (
-                <div className="flex justify-end">
+                <div className="flex justify-center sm:justify-end">
                   <Button
                     onClick={() => downloadContent("converted")}
                     variant="outline"
                     size="sm"
-                    className="h-7 text-xs"
+                    className="h-7 text-xs w-full sm:w-auto"
                   >
                     <Download className="h-3 w-3 mr-1" />
                     Download Converted
@@ -572,19 +572,19 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
           {/* Font Upload Section */}
           <div className="p-4 border rounded-lg bg-muted/20">
             <h4 className="text-sm font-medium mb-3">Custom Font Upload</h4>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <input
                   type="file"
                   accept=".ttf,.otf,.woff,.woff2"
-                  className="text-xs"
+                  className="text-xs file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 cursor-pointer"
                   id="font-upload"
                 />
-                <label htmlFor="font-upload" className="text-xs text-muted-foreground">
+                <label htmlFor="font-upload" className="text-xs text-muted-foreground cursor-pointer hover:text-foreground transition-colors">
                   Upload custom font file
                 </label>
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground sm:ml-auto">
                 Supported formats: TTF, OTF, WOFF, WOFF2
               </p>
             </div>
