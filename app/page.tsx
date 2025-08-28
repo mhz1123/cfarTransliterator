@@ -14,6 +14,7 @@ import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Languages, FileText, Zap, Shield, Settings, Type } from "lucide-react"
 import { useTranslationOptions } from "@/lib/translation-options-context"
+import { trackFeatureUsageEvent } from "@/components/analytics-tracker"
 
 export default function HomePage() {
   const [direction, setDirection] = useState<"urdu-to-roman" | "roman-to-urdu">("urdu-to-roman")

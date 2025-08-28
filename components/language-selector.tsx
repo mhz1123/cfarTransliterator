@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Languages, ArrowRight } from "lucide-react"
+import { trackFeatureUsageEvent } from "@/components/analytics-tracker"
 
 interface LanguageSelectorProps {
   direction: "urdu-to-roman" | "roman-to-urdu"
@@ -66,7 +67,11 @@ export function LanguageSelector({ direction, onDirectionChange, className }: La
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => onDirectionChange(direction === "urdu-to-roman" ? "roman-to-urdu" : "urdu-to-roman")}
+                onClick={() => {
+                  const newDirection = direction === "urdu-to-roman" ? "roman-to-urdu" : "urdu-to-roman"
+                  onDirectionChange(newDirection)
+                  trackFeatureUsageEvent('direction_swap')
+                }}
               >
                 Swap
               </Button>

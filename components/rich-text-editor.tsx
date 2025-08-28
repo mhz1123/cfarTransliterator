@@ -17,47 +17,34 @@ import {
   Type,
   RotateCcw,
   ArrowRightLeft,
-  Download,
-  Upload
+  Download
 } from "lucide-react"
 import { useTranslationOptions } from "@/lib/translation-options-context"
 import { transliterationEngine } from "@/lib/transliteration"
+import { trackFeatureUsageEvent, trackTranslationEvent } from "@/components/analytics-tracker"
 
 interface TextEditorProps {
   direction: "urdu-to-roman" | "roman-to-urdu"
   onDirectionChange: (direction: "urdu-to-roman" | "roman-to-urdu") => void
 }
 
-interface TextFormat {
-  bold: boolean
-  italic: boolean
-  underline: boolean
-  strikethrough: boolean
-  align: "left" | "center" | "right" | "justify"
-  fontSize: number
-  fontFamily: string
-}
-
 interface FormattedText {
   text: string
-  format: TextFormat
+  format: {
+    bold: boolean
+    italic: boolean
+    underline: boolean
+    strikethrough: boolean
+    align: "left" | "center" | "right" | "justify"
+    fontSize: number
+    fontFamily: string
+  }
 }
 
 export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps) {
-  const [content, setContent] = useState<FormattedText[]>([
-    { text: "", format: { bold: false, italic: false, underline: false, strikethrough: false, align: "left", fontSize: 16, fontFamily: "default" } }
-  ])
-  const [currentFormat, setCurrentFormat] = useState<TextFormat>({
-    bold: false,
-    italic: false,
-    underline: false,
-    strikethrough: false,
-    align: "left",
-    fontSize: 16,
-    fontFamily: "default"
-  })
-  const [convertedContent, setConvertedContent] = useState<FormattedText[]>([])
+  const [convertedContent, setConvertedContent] = useState<string>("")
   const [isConverting, setIsConverting] = useState(false)
+  const [toolbarUpdate, setToolbarUpdate] = useState(0) // Force re-render for toolbar
   const editorRef = useRef<HTMLDivElement>(null)
   const { options } = useTranslationOptions()
 
@@ -70,59 +57,162 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
 
   const fontSizeOptions = [12, 14, 16, 18, 20, 24, 28, 32, 36, 48, 72]
 
-  const toggleFormat = (format: keyof Omit<TextFormat, 'align' | 'fontSize' | 'fontFamily'>) => {
-    setCurrentFormat(prev => ({
-      ...prev,
-      [format]: !prev[format]
-    }))
+  // Initialize editor with proper contentEditable setup
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.innerHTML = '<div><br></div>'
+    }
+  }, [])
+
+  // Add event listeners for selection changes
+  useEffect(() => {
+    const editor = editorRef.current
+    if (!editor) return
+
+    const handleSelectionChange = () => {
+      // Force re-render to update toolbar state
+      setToolbarUpdate(prev => prev + 1)
+    }
+
+    const handleMouseUp = () => {
+      handleSelectionChange()
+    }
+
+    const handleKeyUp = () => {
+      handleSelectionChange()
+    }
+
+    document.addEventListener('selectionchange', handleSelectionChange)
+    editor.addEventListener('mouseup', handleMouseUp)
+    editor.addEventListener('keyup', handleKeyUp)
+
+    return () => {
+      document.removeEventListener('selectionchange', handleSelectionChange)
+      editor.removeEventListener('mouseup', handleMouseUp)
+      editor.removeEventListener('keyup', handleKeyUp)
+    }
+  }, [])
+
+  // Apply formatting to selected text
+  const applyFormat = (command: string, value?: string) => {
+    document.execCommand(command, false, value)
+    editorRef.current?.focus()
+    // Force toolbar update after applying format
+    setTimeout(() => setToolbarUpdate(prev => prev + 1), 10)
   }
 
-  const setAlignment = (align: TextFormat['align']) => {
-    setCurrentFormat(prev => ({ ...prev, align }))
+  // Get current formatting state
+  const getCurrentFormat = () => {
+    return {
+      bold: document.queryCommandState('bold'),
+      italic: document.queryCommandState('italic'),
+      underline: document.queryCommandState('underline'),
+      strikethrough: document.queryCommandState('strikethrough'),
+      align: getCurrentAlignment(),
+      fontSize: getCurrentFontSize(),
+      fontFamily: getCurrentFontFamily()
+    }
+  }
+
+  const getCurrentAlignment = () => {
+    if (document.queryCommandState('justifyLeft')) return "left"
+    if (document.queryCommandState('justifyCenter')) return "center"
+    if (document.queryCommandState('justifyRight')) return "right"
+    if (document.queryCommandState('justifyFull')) return "justify"
+    return "left"
+  }
+
+  const getCurrentFontSize = () => {
+    const selection = window.getSelection()
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0)
+      const element = range.commonAncestorContainer.nodeType === Node.TEXT_NODE 
+        ? range.commonAncestorContainer.parentElement 
+        : range.commonAncestorContainer as Element
+      
+      if (element) {
+        const fontSize = window.getComputedStyle(element).fontSize
+        return parseInt(fontSize) || 16
+      }
+    }
+    return 16
+  }
+
+  const getCurrentFontFamily = () => {
+    const selection = window.getSelection()
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0)
+      const element = range.commonAncestorContainer.nodeType === Node.TEXT_NODE 
+        ? range.commonAncestorContainer.parentElement 
+        : range.commonAncestorContainer as Element
+      
+      if (element) {
+        const fontFamily = window.getComputedStyle(element).fontFamily
+        // Map font family back to our options
+        if (fontFamily.includes('Noto Nastaliq Urdu')) return "default"
+        if (fontFamily.includes('Jameel Noori Nastaleeq')) return "jameel"
+        if (fontFamily.includes('Alvi Nastaleeq')) return "alvi"
+        return "default"
+      }
+    }
+    return "default"
+  }
+
+  const setAlignment = (align: "left" | "center" | "right" | "justify") => {
+    const command = `justify${align.charAt(0).toUpperCase() + align.slice(1)}`
+    applyFormat(command)
+    // Force toolbar update after alignment change
+    setTimeout(() => setToolbarUpdate(prev => prev + 1), 10)
   }
 
   const setFontSize = (size: number) => {
-    setCurrentFormat(prev => ({ ...prev, fontSize: size }))
+    applyFormat('fontSize', size.toString())
+    // Force toolbar update after font size change
+    setTimeout(() => setToolbarUpdate(prev => prev + 1), 10)
   }
 
   const setFontFamily = (font: string) => {
-    setCurrentFormat(prev => ({ ...prev, fontFamily: font }))
-  }
-
-  const handleTextChange = (e: React.FormEvent<HTMLDivElement>) => {
-    const text = e.currentTarget.innerText
-    setContent([{ text, format: currentFormat }])
+    const fontOption = fontOptions.find(f => f.value === font)
+    if (fontOption) {
+      applyFormat('fontName', fontOption.urduFont)
+      // Force toolbar update after font family change
+      setTimeout(() => setToolbarUpdate(prev => prev + 1), 10)
+    }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      setContent(prev => [...prev, { text: "", format: currentFormat }])
+      applyFormat('insertParagraph')
     }
   }
 
   const convertContent = async () => {
-    if (!content[0]?.text.trim()) return
+    if (!editorRef.current || !editorRef.current.innerText.trim()) return
 
     setIsConverting(true)
     try {
-             const converted = await Promise.all(
-         content.map(async (item) => {
-           let convertedText: string
-           if (direction === "roman-to-urdu") {
-             const result = await transliterationEngine.transliterateRomanToUrdu(item.text)
-             convertedText = result.transliteratedText
-           } else {
-             const result = await transliterationEngine.transliterateUrduToRoman(item.text)
-             convertedText = result.transliteratedText
-           }
-           return {
-             text: convertedText,
-             format: item.format
-           }
-         })
-       )
-      setConvertedContent(converted)
+      const htmlContent = editorRef.current.innerHTML
+      const textContent = editorRef.current.innerText
+
+      // Convert the text content
+      let convertedText: string
+      if (direction === "roman-to-urdu") {
+        const result = await transliterationEngine.transliterateRomanToUrdu(textContent)
+        convertedText = result.transliteratedText
+      } else {
+        const result = await transliterationEngine.transliterateUrduToRoman(textContent)
+        convertedText = result.transliteratedText
+      }
+
+      // Apply the same HTML structure to converted text
+      const convertedHtml = applyFormattingToConvertedTextAdvanced(htmlContent, convertedText)
+      setConvertedContent(convertedHtml)
+
+      // Track translation event
+      const wordCount = textContent.split(/\s+/).length
+      trackTranslationEvent(direction, 'rich_text_editor', wordCount)
+      trackFeatureUsageEvent('rich_text_editor_conversion')
     } catch (error) {
       console.error("Conversion error:", error)
     } finally {
@@ -130,27 +220,126 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
     }
   }
 
+  const applyFormattingToConvertedText = (originalHtml: string, convertedText: string) => {
+    // Create a temporary div to parse the original HTML
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = originalHtml
+
+    // Split converted text into lines
+    const convertedLines = convertedText.split('\n')
+    
+    // Process each line and preserve formatting
+    const formattedLines = convertedLines.map((line, index) => {
+      // Find the corresponding original element
+      const originalElement = tempDiv.children[index] as HTMLElement
+      
+      if (originalElement && line.trim()) {
+        // Clone the original element to preserve all formatting
+        const clonedElement = originalElement.cloneNode(true) as HTMLElement
+        
+        // Clear the content and add the converted text
+        clonedElement.innerHTML = ''
+        clonedElement.textContent = line
+        
+        return clonedElement.outerHTML
+      }
+      
+      // For empty lines, preserve the original element structure
+      if (originalElement) {
+        return originalElement.outerHTML
+      }
+      
+      return '<div><br></div>'
+    })
+    
+    return formattedLines.join('')
+  }
+
+  const applyFormattingToConvertedTextAdvanced = (originalHtml: string, convertedText: string) => {
+    // Create a temporary div to parse the original HTML
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = originalHtml
+
+    // Split converted text into lines
+    const convertedLines = convertedText.split('\n')
+    
+    // Process each line and preserve formatting
+    const formattedLines = convertedLines.map((line, index) => {
+      // Find the corresponding original element
+      const originalElement = tempDiv.children[index] as HTMLElement
+      
+      if (originalElement && line.trim()) {
+        // Clone the original element to preserve all formatting
+        const clonedElement = originalElement.cloneNode(true) as HTMLElement
+        
+        // Replace the text content while preserving HTML structure
+        const originalText = originalElement.textContent || ''
+        if (originalText) {
+          // Walk through the DOM tree and replace text nodes
+          const walker = document.createTreeWalker(
+            clonedElement,
+            NodeFilter.SHOW_TEXT,
+            null
+          )
+          
+          let textNode
+          while (textNode = walker.nextNode()) {
+            if (textNode.textContent && textNode.textContent.trim()) {
+              textNode.textContent = line
+              break // Replace only the first text node
+            }
+          }
+        } else {
+          // If no text content, set the innerHTML
+          clonedElement.innerHTML = line
+        }
+        
+        return clonedElement.outerHTML
+      }
+      
+      // For empty lines, preserve the original element structure
+      if (originalElement) {
+        return originalElement.outerHTML
+      }
+      
+      return '<div><br></div>'
+    })
+    
+    return formattedLines.join('')
+  }
+
   const clearContent = () => {
-    setContent([{ text: "", format: { bold: false, italic: false, underline: false, strikethrough: false, align: "left", fontSize: 16, fontFamily: "default" } }])
-    setConvertedContent([])
+    if (editorRef.current) {
+      editorRef.current.innerHTML = '<div><br></div>'
+    }
+    setConvertedContent("")
   }
 
   const swapDirection = () => {
     const newDirection = direction === "urdu-to-roman" ? "roman-to-urdu" : "urdu-to-roman"
     onDirectionChange(newDirection)
-    setConvertedContent([])
+    setConvertedContent("")
   }
 
   const downloadContent = (type: "original" | "converted") => {
-    const data = type === "original" ? content : convertedContent
-    if (!data[0]?.text.trim()) return
+    let content = ""
+    let filename = ""
 
-    const text = data.map(item => item.text).join('\n')
-    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' })
+    if (type === "original") {
+      content = editorRef.current?.innerText || ""
+      filename = `urdu-text-original-${new Date().toISOString().split('T')[0]}.txt`
+    } else {
+      content = convertedContent.replace(/<[^>]*>/g, '') // Remove HTML tags
+      filename = `urdu-text-converted-${new Date().toISOString().split('T')[0]}.txt`
+    }
+
+    if (!content.trim()) return
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `urdu-text-${type}-${new Date().toISOString().split('T')[0]}.txt`
+    a.download = filename
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -163,20 +352,6 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
       return font.urduFont
     }
     return fontValue === "default" ? "inherit" : fontValue
-  }
-
-  const getTextStyle = (format: TextFormat, isUrdu: boolean = false) => {
-    return {
-      fontWeight: format.bold ? 'bold' : 'normal',
-      fontStyle: format.italic ? 'italic' : 'normal',
-      textDecoration: [
-        format.underline ? 'underline' : '',
-        format.strikethrough ? 'line-through' : ''
-      ].filter(Boolean).join(' '),
-      textAlign: format.align,
-      fontSize: `${format.fontSize}px`,
-      fontFamily: getFontFamily(format.fontFamily, isUrdu)
-    }
   }
 
   return (
@@ -212,33 +387,33 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
             {/* Text Formatting */}
             <div className="flex items-center gap-1">
               <Button
-                variant={currentFormat.bold ? "default" : "outline"}
+                variant={getCurrentFormat().bold ? "default" : "outline"}
                 size="sm"
-                onClick={() => toggleFormat('bold')}
+                onClick={() => applyFormat('bold')}
                 className="h-8 w-8 p-0"
               >
                 <Bold className="h-3 w-3" />
               </Button>
               <Button
-                variant={currentFormat.italic ? "default" : "outline"}
+                variant={getCurrentFormat().italic ? "default" : "outline"}
                 size="sm"
-                onClick={() => toggleFormat('italic')}
+                onClick={() => applyFormat('italic')}
                 className="h-8 w-8 p-0"
               >
                 <Italic className="h-3 w-3" />
               </Button>
               <Button
-                variant={currentFormat.underline ? "default" : "outline"}
+                variant={getCurrentFormat().underline ? "default" : "outline"}
                 size="sm"
-                onClick={() => toggleFormat('underline')}
+                onClick={() => applyFormat('underline')}
                 className="h-8 w-8 p-0"
               >
                 <Underline className="h-3 w-3" />
               </Button>
               <Button
-                variant={currentFormat.strikethrough ? "default" : "outline"}
+                variant={getCurrentFormat().strikethrough ? "default" : "outline"}
                 size="sm"
-                onClick={() => toggleFormat('strikethrough')}
+                onClick={() => applyFormat('strikethrough')}
                 className="h-8 w-8 p-0"
               >
                 <Strikethrough className="h-3 w-3" />
@@ -250,7 +425,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
             {/* Alignment */}
             <div className="flex items-center gap-1">
               <Button
-                variant={currentFormat.align === "left" ? "default" : "outline"}
+                variant={getCurrentFormat().align === "left" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setAlignment("left")}
                 className="h-8 w-8 p-0"
@@ -258,7 +433,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
                 <AlignLeft className="h-3 w-3" />
               </Button>
               <Button
-                variant={currentFormat.align === "center" ? "default" : "outline"}
+                variant={getCurrentFormat().align === "center" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setAlignment("center")}
                 className="h-8 w-8 p-0"
@@ -266,7 +441,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
                 <AlignCenter className="h-3 w-3" />
               </Button>
               <Button
-                variant={currentFormat.align === "right" ? "default" : "outline"}
+                variant={getCurrentFormat().align === "right" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setAlignment("right")}
                 className="h-8 w-8 p-0"
@@ -274,7 +449,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
                 <AlignRight className="h-3 w-3" />
               </Button>
               <Button
-                variant={currentFormat.align === "justify" ? "default" : "outline"}
+                variant={getCurrentFormat().align === "justify" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setAlignment("justify")}
                 className="h-8 w-8 p-0"
@@ -289,7 +464,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
             <div className="flex items-center gap-2">
               <Type className="h-3 w-3 text-muted-foreground" />
               <select
-                value={currentFormat.fontSize}
+                value={getCurrentFormat().fontSize}
                 onChange={(e) => setFontSize(Number(e.target.value))}
                 className="h-8 px-2 text-xs border rounded bg-background"
               >
@@ -305,7 +480,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
             <div className="flex items-center gap-2">
               <Type className="h-3 w-3 text-muted-foreground" />
               <select
-                value={currentFormat.fontFamily}
+                value={getCurrentFormat().fontFamily}
                 onChange={(e) => setFontFamily(e.target.value)}
                 className="h-8 px-2 text-xs border rounded bg-background"
               >
@@ -346,10 +521,13 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
               <div
                 ref={editorRef}
                 contentEditable
-                onInput={handleTextChange}
                 onKeyDown={handleKeyDown}
-                className="min-h-64 p-4 border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                style={getTextStyle(currentFormat)}
+                className="min-h-64 p-4 border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 cursor-text break-words whitespace-pre-wrap"
+                style={{
+                  fontFamily: getFontFamily(getCurrentFormat().fontFamily, direction === "urdu-to-roman"),
+                  direction: direction === "urdu-to-roman" ? "rtl" : "ltr",
+                  caretColor: "currentColor"
+                }}
                 suppressContentEditableWarning
               />
             </div>
@@ -360,31 +538,22 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
                 <h4 className="text-sm font-medium">Converted Text ({direction === "roman-to-urdu" ? "Urdu" : "Roman Urdu"})</h4>
                 <Button
                   onClick={convertContent}
-                  disabled={!content[0]?.text.trim() || isConverting}
+                  disabled={!editorRef.current?.innerText.trim() || isConverting}
                   size="sm"
                   className="h-7 text-xs"
                 >
                   {isConverting ? "Converting..." : "Convert"}
                 </Button>
               </div>
-              <div className="min-h-64 p-4 border rounded-lg bg-muted/30 overflow-auto">
-                {convertedContent.length > 0 ? (
-                  convertedContent.map((item, index) => (
-                    <div
-                      key={index}
-                      style={getTextStyle(item.format, direction === "roman-to-urdu")}
-                      className="mb-2"
-                    >
-                      {item.text}
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-muted-foreground text-sm">
-                    Converted text will appear here...
-                  </p>
-                )}
-              </div>
-              {convertedContent.length > 0 && (
+              <div 
+                className="min-h-64 p-4 border rounded-lg bg-muted/30 overflow-auto"
+                style={{
+                  fontFamily: getFontFamily(getCurrentFormat().fontFamily, direction === "roman-to-urdu"),
+                  direction: direction === "roman-to-urdu" ? "rtl" : "ltr"
+                }}
+                dangerouslySetInnerHTML={{ __html: convertedContent || '<p class="text-muted-foreground text-sm">Converted text will appear here...</p>' }}
+              />
+              {convertedContent && (
                 <div className="flex justify-end">
                   <Button
                     onClick={() => downloadContent("converted")}

@@ -4,6 +4,8 @@ import { DM_Sans, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { TranslationOptionsProvider } from "@/lib/translation-options-context"
 import { Toaster } from "@/components/ui/toaster"
+import "@/lib/firebase" // Initialize Firebase Analytics
+import { AnalyticsTracker } from "@/components/analytics-tracker"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -31,10 +33,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${spaceGrotesk.variable} antialiased`}>
       <body>
-        <TranslationOptionsProvider>
-          {children}
-          <Toaster />
-        </TranslationOptionsProvider>
+        <AnalyticsTracker>
+          <TranslationOptionsProvider>
+            {children}
+            <Toaster />
+          </TranslationOptionsProvider>
+        </AnalyticsTracker>
       </body>
     </html>
   )

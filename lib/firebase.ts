@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, isSupported, logEvent } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,4 +18,47 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// Initialize Analytics with proper error handling
+let analytics: any = null;
+
+// Check if analytics is supported and initialize it
+const initializeAnalytics = async () => {
+  try {
+    const analyticsSupported = await isSupported();
+    if (analyticsSupported) {
+      analytics = getAnalytics(app);
+      console.log('Firebase Analytics initialized successfully');
+      
+      // Log a test event to verify analytics is working
+      logEvent(analytics, 'app_initialized', {
+        app_name: 'C-FAR Transliterator',
+        timestamp: new Date().toISOString()
+      });
+    } else {
+      console.warn('Firebase Analytics is not supported in this environment');
+    }
+  } catch (error) {
+    console.error('Failed to initialize Firebase Analytics:', error);
+  }
+};
+
+// Initialize analytics when the module is loaded
+if (typeof window !== 'undefined') {
+  initializeAnalytics();
+}
+
+// Export analytics instance and helper functions
+export { app, analytics };
+
+// Helper function to log custom events
+export const logAnalyticsEvent = (eventName: string, parameters?: Record<string, any>) => {
+  if (analytics) {
+    try {
+      logEvent(analytics, eventName, parameters);
+      console.log(`Analytics event logged: ${eventName}`, parameters);
+    } catch (error) {
+      console.error('Failed to log analytics event:', error);
+    }
+  }
+};
