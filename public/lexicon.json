@@ -4,6 +4,1302 @@
     "roman_urdu": "aik"
   },
   {
+        "urdu_script": "آؤ",
+        "roman_urdu": "aao"
+      },
+  {
+        "urdu_script": "آو",
+        "roman_urdu": "aao"
+    },
+    {
+        "urdu_script": "آئی",
+        "roman_urdu": "aai"
+    },
+    {
+        "urdu_script": "آئیں",
+        "roman_urdu": "aaien"
+    },
+    {
+        "urdu_script": "آئے",
+        "roman_urdu": "aye"
+    },
+    {
+        "urdu_script": "آج",
+        "roman_urdu": "aaj"
+    },
+    {
+        "urdu_script": "آجاؤ",
+        "roman_urdu": "aajao"
+    },
+    {
+        "urdu_script": "آجائیں",
+        "roman_urdu": "aajien"
+    },
+    {
+        "urdu_script": "آجائیے",
+        "roman_urdu": "aajiye"
+    },
+    {
+        "urdu_script": "آجاو",
+        "roman_urdu": "aajao"
+    },
+    {
+        "urdu_script": "آجکل",
+        "roman_urdu": "aajkal"
+    },
+    {
+        "urdu_script": "آپ",
+        "roman_urdu": "aap"
+    },
+    {
+        "urdu_script": "آپکا",
+        "roman_urdu": "aapka"
+    },
+    {
+        "urdu_script": "آپکو",
+        "roman_urdu": "aapka"
+    },
+    {
+        "urdu_script": "آپکی",
+        "roman_urdu": "aapki"
+    },
+    {
+        "urdu_script": "آیا",
+        "roman_urdu": "aya"
+    },
+    {
+        "urdu_script": "اب",
+        "roman_urdu": "ab"
+    },
+    {
+        "urdu_script": "ابھی",
+        "roman_urdu": "abhi"
+    },
+    {
+        "urdu_script": "اس",
+        "roman_urdu": "is"
+    },
+    {
+        "urdu_script": "اسطرح",
+        "roman_urdu": "istrh"
+    },
+    {
+        "urdu_script": "اسکا",
+        "roman_urdu": "iska"
+    },
+    {
+        "urdu_script": "اسکی",
+        "roman_urdu": "iski"
+    },
+    {
+        "urdu_script": "اسکے",
+        "roman_urdu": "iskay"
+    },
+    {
+        "urdu_script": "اسی",
+        "roman_urdu": "isi"
+    },
+    {
+        "urdu_script": "اسے",
+        "roman_urdu": "isy"
+    },
+    {
+        "urdu_script": "الگ",
+        "roman_urdu": "alag"
+    },
+    {
+        "urdu_script": "ان",
+        "roman_urdu": "un"
+    },
+    {
+        "urdu_script": "انکا",
+        "roman_urdu": "inka"
+    },
+    {
+        "urdu_script": "انکی",
+        "roman_urdu": "inki"
+    },
+    {
+        "urdu_script": "انکے",
+        "roman_urdu": "inkay"
+    },
+    {
+        "urdu_script": "انھوں",
+        "roman_urdu": "inhon"
+    },
+    {
+        "urdu_script": "انھیں",
+        "roman_urdu": "inhain"
+    },
+    {
+        "urdu_script": "انہیں",
+        "roman_urdu": "inhain"
+    },
+    {
+        "urdu_script": "اور",
+        "roman_urdu": "aur"
+    },
+    {
+        "urdu_script": "اونچا",
+        "roman_urdu": "uncha"
+    },
+    {
+        "urdu_script": "اونچی",
+        "roman_urdu": "unchi"
+    },
+    {
+        "urdu_script": "اونچے",
+        "roman_urdu": "unchay"
+    },
+    {
+        "urdu_script": "اوپر",
+        "roman_urdu": "upar"
+    },
+    {
+        "urdu_script": "اپنا",
+        "roman_urdu": "apna"
+    },
+    {
+        "urdu_script": "اپنی",
+        "roman_urdu": "apni"
+    },
+    {
+        "urdu_script": "اپنے",
+        "roman_urdu": "apnay"
+    },
+    {
+        "urdu_script": "اکثر",
+        "roman_urdu": "aksar"
+    },
+    {
+        "urdu_script": "اگر",
+        "roman_urdu": "agar"
+    },
+    {
+        "urdu_script": "اگرچہ",
+        "roman_urdu": "agarcha"
+    },
+    {
+        "urdu_script": "اہم",
+        "roman_urdu": "aham"
+    },
+    {
+        "urdu_script": "بائیں",
+        "roman_urdu": "baien"
+    },
+    {
+        "urdu_script": "بار",
+        "roman_urdu": "bar"
+    },
+    {
+        "urdu_script": "بارے",
+        "roman_urdu": "baray"
+    },
+    {
+        "urdu_script": "باہر",
+        "roman_urdu": "bahar"
+    },
+    {
+        "urdu_script": "باہم",
+        "roman_urdu": "baham"
+    },
+    {
+        "urdu_script": "بذریعہ",
+        "roman_urdu": "bazaria"
+    },
+    {
+        "urdu_script": "بس",
+        "roman_urdu": "bs"
+    },
+    {
+        "urdu_script": "بظاہر",
+        "roman_urdu": "bazahir"
+    },
+    {
+        "urdu_script": "بعد",
+        "roman_urdu": "bad"
+    },
+    {
+        "urdu_script": "بغیر",
+        "roman_urdu": "baghair"
+    },
+    {
+        "urdu_script": "بلاشبہ",
+        "roman_urdu": "bilashuba"
+    },
+    {
+        "urdu_script": "بند",
+        "roman_urdu": "band"
+    },
+    {
+        "urdu_script": "بہت",
+        "roman_urdu": "bohat"
+    },
+    {
+        "urdu_script": "بھی",
+        "roman_urdu": "bhi"
+    },
+    {
+        "urdu_script": "بیشتر",
+        "roman_urdu": "bashter"
+    },
+    {
+        "urdu_script": "بیشک",
+        "roman_urdu": "beshak"
+    },
+    {
+        "urdu_script": "بےشک",
+        "roman_urdu": "beshak"
+    },
+    {
+        "urdu_script": "تاہم",
+        "roman_urdu": "taham"
+    },
+    {
+        "urdu_script": "تب",
+        "roman_urdu": "tb"
+    },
+    {
+        "urdu_script": "تجھ",
+        "roman_urdu": "tujh"
+    },
+    {
+        "urdu_script": "تجھے",
+        "roman_urdu": "tujhey"
+    },
+    {
+        "urdu_script": "تر",
+        "roman_urdu": "tr"
+    },
+    {
+        "urdu_script": "ترین",
+        "roman_urdu": "trien"
+    },
+    {
+        "urdu_script": "تعداد",
+        "roman_urdu": "tadad"
+    },
+    {
+        "urdu_script": "تلک",
+        "roman_urdu": "tlak"
+    },
+    {
+        "urdu_script": "تم",
+        "roman_urdu": "tum"
+    },
+    {
+        "urdu_script": "تمام",
+        "roman_urdu": "tamam"
+    },
+    {
+        "urdu_script": "تمکو",
+        "roman_urdu": "tumko"
+    },
+    {
+        "urdu_script": "تمھارا",
+        "roman_urdu": "tumhara"
+    },
+    {
+        "urdu_script": "تمھاری",
+        "roman_urdu": "tumhari"
+    },
+    {
+        "urdu_script": "تمھارے",
+        "roman_urdu": "tumharay"
+    },
+    {
+        "urdu_script": "تمھیں",
+        "roman_urdu": "tumhain"
+    },
+    {
+        "urdu_script": "تمہارا",
+        "roman_urdu": "tumhara"
+    },
+    {
+        "urdu_script": "تمہاری",
+        "roman_urdu": "tumhari"
+    },
+    {
+        "urdu_script": "تمہارے",
+        "roman_urdu": "tumharay"
+    },
+    {
+        "urdu_script": "تمہیں",
+        "roman_urdu": "tumhain"
+    },
+    {
+        "urdu_script": "تو",
+        "roman_urdu": "tou"
+    },
+    {
+        "urdu_script": "تک",
+        "roman_urdu": "tak"
+    },
+    {
+        "urdu_script": "تھا",
+        "roman_urdu": "tha"
+    },
+    {
+        "urdu_script": "تھی",
+        "roman_urdu": "thi"
+    },
+    {
+        "urdu_script": "تھیں",
+        "roman_urdu": "thien"
+    },
+    {
+        "urdu_script": "تھے",
+        "roman_urdu": "thay"
+    },
+    {
+        "urdu_script": "تیسرا",
+        "roman_urdu": "tesra"
+    },
+    {
+        "urdu_script": "تیسری",
+        "roman_urdu": "tesri"
+    },
+    {
+        "urdu_script": "تیسرے",
+        "roman_urdu": "tesray"
+    },
+    {
+        "urdu_script": "جائیں",
+        "roman_urdu": "jien"
+    },
+    {
+        "urdu_script": "جاتا",
+        "roman_urdu": "jata"
+    },
+    {
+        "urdu_script": "جاتی",
+        "roman_urdu": "jati"
+    },
+    {
+        "urdu_script": "جاتے",
+        "roman_urdu": "jatay"
+    },
+    {
+        "urdu_script": "جانا",
+        "roman_urdu": "jana"
+    },
+    {
+        "urdu_script": "جانے",
+        "roman_urdu": "janay"
+    },
+    {
+        "urdu_script": "جائے",
+        "roman_urdu": "jaye"
+    },
+    {
+        "urdu_script": "جب",
+        "roman_urdu": "jab"
+    },
+    {
+        "urdu_script": "جبہی",
+        "roman_urdu": "jabhi"
+    },
+    {
+        "urdu_script": "جبھی",
+        "roman_urdu": "jabhi"
+    },
+    {
+        "urdu_script": "جبکہ",
+        "roman_urdu": "jabky"
+    },
+    {
+        "urdu_script": "جو",
+        "roman_urdu": "jo"
+    },
+    {
+        "urdu_script": "جہاں",
+        "roman_urdu": "jahan"
+    },
+    {
+        "urdu_script": "جیسا",
+        "roman_urdu": "jesa"
+    },
+    {
+        "urdu_script": "جیساکہ",
+        "roman_urdu": "jesaky"
+    },
+    {
+        "urdu_script": "جیسی",
+        "roman_urdu": "jesi"
+    },
+    {
+        "urdu_script": "جیسے",
+        "roman_urdu": "jesay"
+    },
+    {
+        "urdu_script": "خود",
+        "roman_urdu": "khud"
+    },
+    {
+        "urdu_script": "دائیں",
+        "roman_urdu": "dien"
+    },
+    {
+        "urdu_script": "درمیان",
+        "roman_urdu": "darmiyan"
+    },
+    {
+        "urdu_script": "دفعہ",
+        "roman_urdu": "dafa"
+    },
+    {
+        "urdu_script": "دو",
+        "roman_urdu": "do"
+    },
+    {
+        "urdu_script": "دور",
+        "roman_urdu": "door"
+    },
+    {
+        "urdu_script": "دوران",
+        "roman_urdu": "doran"
+    },
+    {
+        "urdu_script": "دوسرا",
+        "roman_urdu": "dusra"
+    },
+    {
+        "urdu_script": "دوسری",
+        "roman_urdu": "dusri"
+    },
+    {
+        "urdu_script": "دوسرے",
+        "roman_urdu": "dusray"
+    },
+    {
+        "urdu_script": "دونوں",
+        "roman_urdu": "dono"
+    },
+    {
+        "urdu_script": "دی",
+        "roman_urdu": "di"
+    },
+    {
+        "urdu_script": "دیا",
+        "roman_urdu": "diya"
+    },
+    {
+        "urdu_script": "دینا",
+        "roman_urdu": "dena"
+    },
+    {
+        "urdu_script": "دینی",
+        "roman_urdu": "deni"
+    },
+    {
+        "urdu_script": "دینے",
+        "roman_urdu": "denay"
+    },
+    {
+        "urdu_script": "دیکھا",
+        "roman_urdu": "dekha"
+    },
+    {
+        "urdu_script": "دیکھو",
+        "roman_urdu": "dekho"
+    },
+    {
+        "urdu_script": "دیکھی",
+        "roman_urdu": "dekhi"
+    },
+    {
+        "urdu_script": "دیکھیں",
+        "roman_urdu": "dekhain"
+    },
+    {
+        "urdu_script": "دے",
+        "roman_urdu": "dy"
+    },
+    {
+        "urdu_script": "رکھ",
+        "roman_urdu": "rakh"
+    },
+    {
+        "urdu_script": "رکھا",
+        "roman_urdu": "rakha"
+    },
+    {
+        "urdu_script": "رکھی",
+        "roman_urdu": "rakhi"
+    },
+    {
+        "urdu_script": "رکھیں",
+        "roman_urdu": "rakhien"
+    },
+    {
+        "urdu_script": "رکھے",
+        "roman_urdu": "rakhy"
+    },
+    {
+        "urdu_script": "رہ",
+        "roman_urdu": "reh"
+    },
+    {
+        "urdu_script": "رہا",
+        "roman_urdu": "raha"
+    },
+    {
+        "urdu_script": "رہی",
+        "roman_urdu": "rahi"
+    },
+    {
+        "urdu_script": "رہیں",
+        "roman_urdu": "rahain"
+    },
+    {
+        "urdu_script": "رہے",
+        "roman_urdu": "rahay"
+    },
+    {
+        "urdu_script": "زیادہ",
+        "roman_urdu": "zayada"
+    },
+    {
+        "urdu_script": "ساتھ",
+        "roman_urdu": "sath"
+    },
+    {
+        "urdu_script": "سارا",
+        "roman_urdu": "sara"
+    },
+    {
+        "urdu_script": "ساری",
+        "roman_urdu": "sari"
+    },
+    {
+        "urdu_script": "سارے",
+        "roman_urdu": "sary"
+    },
+    {
+        "urdu_script": "سب",
+        "roman_urdu": "sab"
+    },
+    {
+        "urdu_script": "سبھی",
+        "roman_urdu": "sabhi"
+    },
+    {
+        "urdu_script": "سبہی",
+        "roman_urdu": "sabhi"
+    },
+    {
+        "urdu_script": "سکتا",
+        "roman_urdu": "sakta"
+    },
+    {
+        "urdu_script": "سکتی",
+        "roman_urdu": "sakti"
+    },
+    {
+        "urdu_script": "سکتیں",
+        "roman_urdu": "saktain"
+    },
+    {
+        "urdu_script": "سکتے",
+        "roman_urdu": "saktay"
+    },
+    {
+        "urdu_script": "سوا",
+        "roman_urdu": "sawa"
+    },
+    {
+        "urdu_script": "سے",
+        "roman_urdu": "sy"
+    },
+    {
+        "urdu_script": "شاید",
+        "roman_urdu": "shayad"
+    },
+    {
+        "urdu_script": "شدہ",
+        "roman_urdu": "shuda"
+    },
+    {
+        "urdu_script": "صحیح:",
+        "roman_urdu": "sahih"
+    },
+    {
+        "urdu_script": "صرف",
+        "roman_urdu": "sirf"
+    },
+    {
+        "urdu_script": "طرح",
+        "roman_urdu": "tarah"
+    },
+    {
+        "urdu_script": "طرف",
+        "roman_urdu": "taraf"
+    },
+    {
+        "urdu_script": "غلط",
+        "roman_urdu": "ghalat"
+    },
+    {
+        "urdu_script": "غیر",
+        "roman_urdu": "ghair"
+    },
+    {
+        "urdu_script": "لئے",
+        "roman_urdu": "liye"
+    },
+    {
+        "urdu_script": "لا",
+        "roman_urdu": "la"
+    },
+    {
+        "urdu_script": "لازمی",
+        "roman_urdu": "lazmi"
+    },
+    {
+        "urdu_script": "لو",
+        "roman_urdu": "lo"
+    },
+    {
+        "urdu_script": "لگا",
+        "roman_urdu": "laga"
+    },
+    {
+        "urdu_script": "لگی",
+        "roman_urdu": "lagi"
+    },
+    {
+        "urdu_script": "لگیں",
+        "roman_urdu": "lagien"
+    },
+    {
+        "urdu_script": "لگے",
+        "roman_urdu": "lagay"
+    },
+    {
+        "urdu_script": "لی",
+        "roman_urdu": "li"
+    },
+    {
+        "urdu_script": "لیا",
+        "roman_urdu": "liya"
+    },
+    {
+        "urdu_script": "لینا",
+        "roman_urdu": "lena"
+    },
+    {
+        "urdu_script": "لینی",
+        "roman_urdu": "leni"
+    },
+    {
+        "urdu_script": "لینے",
+        "roman_urdu": "lenay"
+    },
+    {
+        "urdu_script": "لیکن",
+        "roman_urdu": "lekin"
+    },
+    {
+        "urdu_script": "لیے",
+        "roman_urdu": "liye"
+    },
+    {
+        "urdu_script": "لیئے",
+        "roman_urdu": "liye"
+    },
+    {
+        "urdu_script": "لے",
+        "roman_urdu": "la"
+    },
+    {
+        "urdu_script": "مجھ",
+        "roman_urdu": "mujh"
+    },
+    {
+        "urdu_script": "مجھکو",
+        "roman_urdu": "mujhko"
+    },
+    {
+        "urdu_script": "مجھے",
+        "roman_urdu": "mujhey"
+    },
+    {
+        "urdu_script": "مرتبہ",
+        "roman_urdu": "martabah"
+    },
+    {
+        "urdu_script": "مزید",
+        "roman_urdu": "mazeed"
+    },
+    {
+        "urdu_script": "مشتمل",
+        "roman_urdu": "mushtamil"
+    },
+    {
+        "urdu_script": "مل",
+        "roman_urdu": "mil"
+    },
+    {
+        "urdu_script": "ملا",
+        "roman_urdu": "mila"
+    },
+    {
+        "urdu_script": "ملو",
+        "roman_urdu": "milo"
+    },
+    {
+        "urdu_script": "ملی",
+        "roman_urdu": "mili"
+    },
+    {
+        "urdu_script": "ملے",
+        "roman_urdu": "milay"
+    },
+    {
+        "urdu_script": "مگر",
+        "roman_urdu": "maghar"
+    },
+    {
+        "urdu_script": "میرا",
+        "roman_urdu": "mera"
+    },
+    {
+        "urdu_script": "میری",
+        "roman_urdu": "meri"
+    },
+    {
+        "urdu_script": "میرے",
+        "roman_urdu": "meray"
+    },
+    {
+        "urdu_script": "میں",
+        "roman_urdu": "main"
+    },
+    {
+        "urdu_script": "نا",
+        "roman_urdu": "na"
+    },
+    {
+        "urdu_script": "نھیں",
+        "roman_urdu": "nahin"
+    },
+    {
+        "urdu_script": "نہ",
+        "roman_urdu": "nah"
+    },
+    {
+        "urdu_script": "نہیں",
+        "roman_urdu": "nahin"
+    },
+    {
+        "urdu_script": "نیچا",
+        "roman_urdu": "necha"
+    },
+    {
+        "urdu_script": "نیچی",
+        "roman_urdu": "nechi"
+    },
+    {
+        "urdu_script": "نیچے",
+        "roman_urdu": "nechay"
+    },
+    {
+        "urdu_script": "نے",
+        "roman_urdu": "nay"
+    },
+    {
+        "urdu_script": "و",
+        "roman_urdu": "wa"
+    },
+    {
+        "urdu_script": "والا",
+        "roman_urdu": "wala"
+    },
+    {
+        "urdu_script": "والوں",
+        "roman_urdu": "walon"
+    },
+    {
+        "urdu_script": "والی",
+        "roman_urdu": "wali"
+    },
+    {
+        "urdu_script": "والے",
+        "roman_urdu": "waly"
+    },
+    {
+        "urdu_script": "وہ",
+        "roman_urdu": "woh"
+    },
+    {
+        "urdu_script": "وہاں",
+        "roman_urdu": "wahan"
+    },
+    {
+        "urdu_script": "وہی",
+        "roman_urdu": "wahi"
+    },
+    {
+        "urdu_script": "ویں",
+        "roman_urdu": "wain"
+    },
+    {
+        "urdu_script": "پاس",
+        "roman_urdu": "pas"
+    },
+    {
+        "urdu_script": "پر",
+        "roman_urdu": "par"
+    },
+    {
+        "urdu_script": "پڑا",
+        "roman_urdu": "para"
+    },
+    {
+        "urdu_script": "پڑے",
+        "roman_urdu": "paray"
+    },
+    {
+        "urdu_script": "پڑی",
+        "roman_urdu": "pari"
+    },
+    {
+        "urdu_script": "پورا",
+        "roman_urdu": "pora"
+    },
+    {
+        "urdu_script": "پوری",
+        "roman_urdu": "pori"
+    },
+    {
+        "urdu_script": "پورے",
+        "roman_urdu": "poray"
+    },
+    {
+        "urdu_script": "پھر",
+        "roman_urdu": "phir"
+    },
+    {
+        "urdu_script": "پھرو",
+        "roman_urdu": "phiro"
+    },
+    {
+        "urdu_script": "پھری",
+        "roman_urdu": "phiri"
+    },
+    {
+        "urdu_script": "پھرے",
+        "roman_urdu": "phiray"
+    },
+    {
+        "urdu_script": "پہلا",
+        "roman_urdu": "pehla"
+    },
+    {
+        "urdu_script": "پہلی",
+        "roman_urdu": "pehli"
+    },
+    {
+        "urdu_script": "پہلے",
+        "roman_urdu": "pehlay"
+    },
+    {
+        "urdu_script": "چاہا",
+        "roman_urdu": "chaha"
+    },
+    {
+        "urdu_script": "چاہتا",
+        "roman_urdu": "chahta"
+    },
+    {
+        "urdu_script": "چاہتی",
+        "roman_urdu": "chahti"
+    },
+    {
+        "urdu_script": "چاہتے",
+        "roman_urdu": "chahti"
+    },
+    {
+        "urdu_script": "چاہیئے",
+        "roman_urdu": "chahiye"
+    },
+    {
+        "urdu_script": "چاہیے",
+        "roman_urdu": "chahiye"
+    },
+    {
+        "urdu_script": "چکا",
+        "roman_urdu": "chuka"
+    },
+    {
+        "urdu_script": "چکی",
+        "roman_urdu": "chuki"
+    },
+    {
+        "urdu_script": "چکیں",
+        "roman_urdu": "chukain"
+    },
+    {
+        "urdu_script": "چکے",
+        "roman_urdu": "chukay"
+    },
+    {
+        "urdu_script": "کا",
+        "roman_urdu": "ka"
+    },
+    {
+        "urdu_script": "کب",
+        "roman_urdu": "kab"
+    },
+    {
+        "urdu_script": "کبھی",
+        "roman_urdu": "kabhi"
+    },
+    {
+        "urdu_script": "کتنا",
+        "roman_urdu": "kitna"
+    },
+    {
+        "urdu_script": "کر",
+        "roman_urdu": "kar"
+    },
+    {
+        "urdu_script": "کرتے",
+        "roman_urdu": "karty"
+    },
+    {
+        "urdu_script": "کرنا",
+        "roman_urdu": "karna"
+    },
+    {
+        "urdu_script": "کرنی",
+        "roman_urdu": "karni"
+    },
+    {
+        "urdu_script": "کرنیکا",
+        "roman_urdu": "karnyka"
+    },
+    {
+        "urdu_script": "کرنیکی",
+        "roman_urdu": "karnyki"
+    },
+    {
+        "urdu_script": "کرنیکے",
+        "roman_urdu": "karnyky"
+    },
+    {
+        "urdu_script": "کرنے",
+        "roman_urdu": "karnay"
+    },
+    {
+        "urdu_script": "کرو",
+        "roman_urdu": "karo"
+    },
+    {
+        "urdu_script": "کروانا",
+        "roman_urdu": "karwana"
+    },
+    {
+        "urdu_script": "کریں",
+        "roman_urdu": "karain"
+    },
+    {
+        "urdu_script": "کرینگے",
+        "roman_urdu": "karaingy"
+    },
+    {
+        "urdu_script": "کس",
+        "roman_urdu": "kis"
+    },
+    {
+        "urdu_script": "کسی",
+        "roman_urdu": "kesi"
+    },
+    {
+        "urdu_script": "کل",
+        "roman_urdu": "kal"
+    },
+    {
+        "urdu_script": "کم",
+        "roman_urdu": "kam"
+    },
+    {
+        "urdu_script": "کمی",
+        "roman_urdu": "kami"
+    },
+    {
+        "urdu_script": "کو",
+        "roman_urdu": "ko"
+    },
+    {
+        "urdu_script": "کوئی",
+        "roman_urdu": "koi"
+    },
+    {
+        "urdu_script": "کون",
+        "roman_urdu": "kon"
+    },
+    {
+        "urdu_script": "کچھ",
+        "roman_urdu": "kuch"
+    },
+    {
+        "urdu_script": "کہ",
+        "roman_urdu": "keh"
+    },
+    {
+        "urdu_script": "کہا",
+        "roman_urdu": "kaha"
+    },
+    {
+        "urdu_script": "کہاں",
+        "roman_urdu": "kahan"
+    },
+    {
+        "urdu_script": "کہتا",
+        "roman_urdu": "kehta"
+    },
+    {
+        "urdu_script": "کہتی",
+        "roman_urdu": "kehti"
+    },
+    {
+        "urdu_script": "کہتے",
+        "roman_urdu": "kehty"
+    },
+    {
+        "urdu_script": "کہنا",
+        "roman_urdu": "kehna"
+    },
+    {
+        "urdu_script": "کہنی",
+        "roman_urdu": "kehni"
+    },
+    {
+        "urdu_script": "کہنے",
+        "roman_urdu": "kehny"
+    },
+    {
+        "urdu_script": "کہو",
+        "roman_urdu": "kaho"
+    },
+    {
+        "urdu_script": "کہوں",
+        "roman_urdu": "kahon"
+    },
+    {
+        "urdu_script": "کہیں",
+        "roman_urdu": "kahain"
+    },
+    {
+        "urdu_script": "کہے",
+        "roman_urdu": "kahay"
+    },
+    {
+        "urdu_script": "کی",
+        "roman_urdu": "ki"
+    },
+    {
+        "urdu_script": "کیا",
+        "roman_urdu": "kya"
+    },
+    {
+        "urdu_script": "کیجئے",
+        "roman_urdu": "kijiye"
+    },
+    {
+        "urdu_script": "کیجیے",
+        "roman_urdu": "kijiye"
+    },
+    {
+        "urdu_script": "کیساتھ",
+        "roman_urdu": "kaysath"
+    },
+    {
+        "urdu_script": "کیسے",
+        "roman_urdu": "kesay"
+    },
+    {
+        "urdu_script": "کیلئے",
+        "roman_urdu": "kyliye"
+    },
+    {
+        "urdu_script": "کیلیے",
+        "roman_urdu": "kyliye"
+    },
+    {
+        "urdu_script": "کیوں",
+        "roman_urdu": "kyon"
+    },
+    {
+        "urdu_script": "کے",
+        "roman_urdu": "kay"
+    },
+    {
+        "urdu_script": "گا",
+        "roman_urdu": "ga"
+    },
+    {
+        "urdu_script": "ہوگئ",
+        "roman_urdu": "hogi"
+    },
+    {
+        "urdu_script": "گئی",
+        "roman_urdu": "hogi"
+    },
+    {
+        "urdu_script": "گئیں",
+        "roman_urdu": "gain"
+    },
+    {
+        "urdu_script": "گئے",
+        "roman_urdu": "gaye"
+    },
+    {
+        "urdu_script": "گی",
+        "roman_urdu": "gi"
+    },
+    {
+        "urdu_script": "گیا",
+        "roman_urdu": "gaya"
+    },
+    {
+        "urdu_script": "گے",
+        "roman_urdu": "ga"
+    },
+    {
+        "urdu_script": "ہاں",
+        "roman_urdu": "han"
+    },
+    {
+        "urdu_script": "ہر",
+        "roman_urdu": "hr"
+    },
+    {
+        "urdu_script": "ہم",
+        "roman_urdu": "hum"
+    },
+    {
+        "urdu_script": "ہمارا",
+        "roman_urdu": "hamara"
+    },
+    {
+        "urdu_script": "ہماری",
+        "roman_urdu": "hamari"
+    },
+    {
+        "urdu_script": "ہمارے",
+        "roman_urdu": "hamary"
+    },
+    {
+        "urdu_script": "ہمیں",
+        "roman_urdu": "hamain"
+    },
+    {
+        "urdu_script": "ہو",
+        "roman_urdu": "ho"
+    },
+    {
+        "urdu_script": "ہوئے",
+        "roman_urdu": "hoey"
+    },
+    {
+        "urdu_script": "ہوا",
+        "roman_urdu": "hoa"
+    },
+    {
+        "urdu_script": "ہونا",
+        "roman_urdu": "hona"
+    },
+    {
+        "urdu_script": "ہونگا",
+        "roman_urdu": "honga"
+    },
+    {
+        "urdu_script": "ہونگی",
+        "roman_urdu": "hongi"
+    },
+    {
+        "urdu_script": "ہونگے",
+        "roman_urdu": "hongy"
+    },
+    {
+        "urdu_script": "ہونی",
+        "roman_urdu": "honi"
+    },
+    {
+        "urdu_script": "ہونے",
+        "roman_urdu": "hony"
+    },
+    {
+        "urdu_script": "ہوچکا",
+        "roman_urdu": "hochuka"
+    },
+    {
+        "urdu_script": "ہوچکی",
+        "roman_urdu": "hochuki"
+    },
+    {
+        "urdu_script": "ہوگئی",
+        "roman_urdu": "hogi"
+    },
+    {
+        "urdu_script": "ہوگا",
+        "roman_urdu": "hoga"
+    },
+    {
+        "urdu_script": "ہوگی",
+        "roman_urdu": "hogi"
+    },
+    {
+        "urdu_script": "ہوگیا",
+        "roman_urdu": "hogaya"
+    },
+    {
+        "urdu_script": "ہوگے",
+        "roman_urdu": "hogy"
+    },
+    {
+        "urdu_script": "ہوگئے",
+        "roman_urdu": "hogy"
+    },
+    {
+        "urdu_script": "ہوں",
+        "roman_urdu": "hon"
+    },
+    {
+        "urdu_script": "ہوے",
+        "roman_urdu": "hoey"
+    },
+    {
+        "urdu_script": "ہی",
+        "roman_urdu": "hi"
+    },
+    {
+        "urdu_script": "ہیں",
+        "roman_urdu": "hain"
+    },
+    {
+        "urdu_script": "ہے",
+        "roman_urdu": "hay"
+    },
+    {
+        "urdu_script": "یوں",
+        "roman_urdu": "yon"
+    },
+    {
+        "urdu_script": "یہ",
+        "roman_urdu": "yeh"
+    },
+    {
+        "urdu_script": "یہاں",
+        "roman_urdu": "yahan"
+  },
+  {
+        "urdu_script": "ہوئی",
+        "roman_urdu": "hui"
+  },
+  {
     "urdu_script": "عامر",
     "roman_urdu": "aamir"
   },
