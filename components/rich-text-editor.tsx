@@ -193,25 +193,87 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
     setIsConverting(true)
     try {
       const htmlContent = editorRef.current.innerHTML
-      const textContent = editorRef.current.innerText
-
-      // Convert the text content
-      let convertedText: string
-      if (direction === "roman-to-urdu") {
-        const result = await transliterationEngine.transliterateRomanToUrdu(textContent)
-        convertedText = result.transliteratedText
-      } else {
-        const result = await transliterationEngine.transliterateUrduToRoman(textContent)
-        convertedText = result.transliteratedText
+      
+      // Parse the original HTML to get line-by-line structure
+      const tempDiv = document.createElement('div')
+      tempDiv.innerHTML = htmlContent
+      
+      console.log('Original HTML structure:', tempDiv.children.length, 'elements')
+      
+      // Convert each line individually while preserving formatting
+      const convertedLines: string[] = []
+      
+      for (let i = 0; i < tempDiv.children.length; i++) {
+        const originalElement = tempDiv.children[i] as HTMLElement
+        const originalText = originalElement.textContent || ''
+        
+        if (originalText.trim()) {
+          // Convert this line's text
+          let convertedText: string
+          if (direction === "roman-to-urdu") {
+            const result = await transliterationEngine.transliterateRomanToUrdu(originalText)
+            convertedText = result.transliteratedText
+          } else {
+            const result = await transliterationEngine.transliterateUrduToRoman(originalText)
+            convertedText = result.transliteratedText
+          }
+          
+          console.log(`Line ${i + 1}: "${originalText}" → "${convertedText}"`)
+          
+          // Clone the original element and replace its text content
+          const clonedElement = originalElement.cloneNode(true) as HTMLElement
+          
+          // Clear all text nodes and replace with converted text
+          const walker = document.createTreeWalker(
+            clonedElement,
+            NodeFilter.SHOW_TEXT,
+            null
+          )
+          
+          // Collect all text nodes first
+          const textNodes: Text[] = []
+          let textNode
+          while (textNode = walker.nextNode()) {
+            if (textNode.textContent && textNode.textContent.trim()) {
+              textNodes.push(textNode as Text)
+            }
+          }
+          
+                      console.log(`Line ${i + 1}: Found ${textNodes.length} text nodes`)
+            
+            if (textNodes.length > 0) {
+              // Replace the first text node with the converted text
+              textNodes[0].textContent = convertedText
+              
+              // Remove all other text nodes to avoid duplication
+              for (let j = 1; j < textNodes.length; j++) {
+                const parentNode = textNodes[j].parentNode
+                if (parentNode) {
+                  parentNode.removeChild(textNodes[j])
+                }
+              }
+              
+              console.log(`Line ${i + 1}: Replaced ${textNodes.length} text nodes with converted text`)
+            } else {
+              // If no text nodes found, set the innerHTML
+              clonedElement.innerHTML = convertedText
+              console.log(`Line ${i + 1}: Set innerHTML directly`)
+            }
+          
+          convertedLines.push(clonedElement.outerHTML)
+        } else {
+          // Preserve empty lines or elements with only formatting
+          convertedLines.push(originalElement.outerHTML)
+        }
       }
-
-      // Apply the same HTML structure to converted text
-      const convertedHtml = applyFormattingToConvertedTextAdvanced(htmlContent, convertedText)
+      
+      const convertedHtml = convertedLines.join('')
+      console.log('Final converted HTML:', convertedHtml)
       setConvertedContent(convertedHtml)
 
       // Track translation event
-      const wordCount = textContent.split(/\s+/).length
-      trackTranslationEvent(direction, 'rich_text_editor', wordCount)
+      const totalWordCount = tempDiv.textContent?.split(/\s+/).length || 0
+      trackTranslationEvent(direction, 'rich_text_editor', totalWordCount)
       trackFeatureUsageEvent('rich_text_editor_conversion')
     } catch (error) {
       console.error("Conversion error:", error)
@@ -220,93 +282,7 @@ export function RichTextEditor({ direction, onDirectionChange }: TextEditorProps
     }
   }
 
-  const applyFormattingToConvertedText = (originalHtml: string, convertedText: string) => {
-    // Create a temporary div to parse the original HTML
-    const tempDiv = document.createElement('div')
-    tempDiv.innerHTML = originalHtml
-
-    // Split converted text into lines
-    const convertedLines = convertedText.split('\n')
-    
-    // Process each line and preserve formatting
-    const formattedLines = convertedLines.map((line, index) => {
-      // Find the corresponding original element
-      const originalElement = tempDiv.children[index] as HTMLElement
-      
-      if (originalElement && line.trim()) {
-        // Clone the original element to preserve all formatting
-        const clonedElement = originalElement.cloneNode(true) as HTMLElement
-        
-        // Clear the content and add the converted text
-        clonedElement.innerHTML = ''
-        clonedElement.textContent = line
-        
-        return clonedElement.outerHTML
-      }
-      
-      // For empty lines, preserve the original element structure
-      if (originalElement) {
-        return originalElement.outerHTML
-      }
-      
-      return '<div><br></div>'
-    })
-    
-    return formattedLines.join('')
-  }
-
-  const applyFormattingToConvertedTextAdvanced = (originalHtml: string, convertedText: string) => {
-    // Create a temporary div to parse the original HTML
-    const tempDiv = document.createElement('div')
-    tempDiv.innerHTML = originalHtml
-
-    // Split converted text into lines
-    const convertedLines = convertedText.split('\n')
-    
-    // Process each line and preserve formatting
-    const formattedLines = convertedLines.map((line, index) => {
-      // Find the corresponding original element
-      const originalElement = tempDiv.children[index] as HTMLElement
-      
-      if (originalElement && line.trim()) {
-        // Clone the original element to preserve all formatting
-        const clonedElement = originalElement.cloneNode(true) as HTMLElement
-        
-        // Replace the text content while preserving HTML structure
-        const originalText = originalElement.textContent || ''
-        if (originalText) {
-          // Walk through the DOM tree and replace text nodes
-          const walker = document.createTreeWalker(
-            clonedElement,
-            NodeFilter.SHOW_TEXT,
-            null
-          )
-          
-          let textNode
-          while (textNode = walker.nextNode()) {
-            if (textNode.textContent && textNode.textContent.trim()) {
-              textNode.textContent = line
-              break // Replace only the first text node
-            }
-          }
-        } else {
-          // If no text content, set the innerHTML
-          clonedElement.innerHTML = line
-        }
-        
-        return clonedElement.outerHTML
-      }
-      
-      // For empty lines, preserve the original element structure
-      if (originalElement) {
-        return originalElement.outerHTML
-      }
-      
-      return '<div><br></div>'
-    })
-    
-    return formattedLines.join('')
-  }
+  
 
   const clearContent = () => {
     if (editorRef.current) {
